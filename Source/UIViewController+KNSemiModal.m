@@ -283,6 +283,11 @@ const struct KNSemiModalOptionKeys KNSemiModalOptionKeys = {
         view.layer.shouldRasterize = YES;
         view.layer.rasterizationScale = [[UIScreen mainScreen] scale];
         
+        // fix view.origin.y is zero.
+        view.frame = (transitionStyle == KNSemiModalTransitionStyleSlideUp
+                      ? CGRectOffset(semiViewFrame, 0, +semiViewHeight)
+                      : semiViewFrame);
+        
         [UIView animateWithDuration:duration animations:^{
             if (transitionStyle == KNSemiModalTransitionStyleSlideUp) {
                 view.frame = semiViewFrame;
